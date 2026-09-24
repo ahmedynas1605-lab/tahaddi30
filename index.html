@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14536B">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="تحدّي ٣٠">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>تحدّي ٣٠ يوم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF6E9;--ink:#2B2340;--mut:#6B6482;--panel:#fff;--track:#EADFCB;--gray:#E3E1E9;--gbd:#C8C5D2;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#181326;--ink:#F3EEFF;--mut:#A79FC0;--panel:#241D38;--track:#372E52;--gray:#3A3450;--gbd:#4D4668}}
+:root[data-theme="dark"]{--bg:#181326;--ink:#F3EEFF;--mut:#A79FC0;--panel:#241D38;--track:#372E52;--gray:#3A3450;--gbd:#4D4668}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Cairo","Segoe UI",Tahoma,Arial,sans-serif;line-height:1.5}
+main{max-width:980px;margin:0 auto;padding:20px 14px 40px}
+h1{font-size:1.9rem;font-weight:800;margin:4px 0 2px}
+.sub{color:var(--mut);margin:0 0 16px}
+.panel{background:var(--panel);border-radius:22px;padding:16px 18px;margin-bottom:18px;box-shadow:0 6px 24px rgba(80,50,120,.12)}
+.stat{display:flex;justify-content:space-between;align-items:baseline;font-weight:600;margin-bottom:10px}
+.stat b{font-size:1.5rem;font-weight:800}
+.bar{height:20px;border-radius:99px;background:var(--track);overflow:hidden}
+.fill{height:100%;width:0;border-radius:99px;background:linear-gradient(270deg,hsl(145 62% 34%),hsl(145 62% 46%));transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.msg{margin:10px 0 0;color:var(--mut);font-size:.95rem;min-height:1.4em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.card{background:var(--panel);border:2px solid var(--gbd);border-radius:18px;padding:10px;display:flex;flex-direction:column;gap:8px;position:relative;box-shadow:0 3px 12px rgba(80,50,120,.08)}
+.card.today{border-color:hsl(355 78% 46%)}
+.card.full{border-color:hsl(145 60% 32%)}
+.top{display:flex;justify-content:space-between;align-items:baseline;padding:0 4px}
+.top b{font-size:1.05rem}
+.date{font-size:.82rem;color:var(--mut)}
+.task{font:inherit;color:var(--ink);text-align:right;cursor:pointer;border:2px solid var(--gbd);background:var(--gray);border-radius:14px;padding:8px 10px;display:flex;align-items:center;gap:8px;font-weight:600;font-size:.95rem;transition:transform .15s,background .2s}
+.task:active{transform:scale(.97)}
+.task:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.task em{font-style:normal;font-size:.72rem;font-weight:800;background:var(--mut);color:var(--panel);border-radius:99px;padding:0 8px;min-width:32px;text-align:center}
+.box{width:24px;height:24px;border-radius:50%;border:2.5px solid var(--mut);background:var(--panel);display:grid;place-items:center;font-style:normal;font-weight:800;color:#fff;font-size:.85rem;flex:none}
+.task[aria-checked="true"]{background:hsl(145 60% 32%);border-color:transparent;color:#fff}
+.task[aria-checked="true"] .box{background:#fff;color:hsl(145 60% 26%)}
+.task[aria-checked="true"] .box::after{content:"✓"}
+.task[aria-checked="true"] em{background:#ffffff35;color:#fff}
+.card.today .task[aria-checked="false"]{background:hsl(355 78% 46%);border-color:transparent;color:#fff}
+.card.today .task[aria-checked="false"] .box{border-color:#fff;background:transparent}
+.card.today .task[aria-checked="false"] em{background:#ffffff38;color:#fff}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 16px;font-size:.9rem;font-weight:600}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;margin-inline-end:6px;background:var(--k)}
+.tag{position:absolute;top:-11px;left:12px;background:var(--ink);color:var(--bg);font-size:.72rem;font-weight:800;border-radius:99px;padding:0 10px}
+.reset{margin-top:22px;font:inherit;font-weight:600;color:var(--mut);background:none;border:2px solid var(--track);border-radius:99px;padding:6px 18px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+  <h1>تحدّي ٣٠ يوم</h1>
+  <p class="sub">كل يوم فيه مهمتين لوحدهم: ٥٠ رقم و١٠ أرقام</p>
+  <p class="legend"><span style="--k:var(--gbd)">لسه</span><span style="--k:hsl(355 78% 46%)">النهارده</span><span style="--k:hsl(145 60% 32%)">اتعمل</span></p>
+  <section class="panel" aria-live="polite">
+    <div class="stat"><span id="count"></span><b id="pct"></b></div>
+    <div class="bar"><div class="fill" id="fill"></div></div>
+    <p class="msg" id="msg"></p>
+  </section>
+  <div class="grid" id="grid"></div>
+  <button class="reset" id="reset">مسح كل التعليمات</button>
+</main>
+<script>
+(function(){
+  var START=new Date(2026,8,24), KEY="tracker30-v2", N=30, T=N*2;
+  var ar=function(n){return n.toLocaleString("ar-EG",{useGrouping:false})};
+  var wd=new Intl.DateTimeFormat("ar-EG",{weekday:"long"});
+  var dm=new Intl.DateTimeFormat("ar-EG",{day:"numeric",month:"long"});
+  var done=[];for(var i=0;i<N;i++)done.push([false,false]);
+  try{
+    var s=JSON.parse(localStorage.getItem(KEY)||"null");
+    if(s&&s.length===N)done=s;
+    else{var o=JSON.parse(localStorage.getItem("tracker30-v1")||"null");
+      if(o&&o.length===N)done=o.map(function(x){return [!!x,!!x]})}
+  }catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}}
+  var t=new Date();t=new Date(t.getFullYear(),t.getMonth(),t.getDate());
+  var todayIdx=Math.round((t-START)/864e5);
+  var grid=document.getElementById("grid"),cards=[],tasks=[];
+  for(let i=0;i<N;i++){
+    var d=new Date(2026,8,24+i);
+    var defs=[[50,(50+i*50)%300+1],[10,(40+i*10)%300+1]];
+    var c=document.createElement("div");
+    c.className="card"+(i===todayIdx?" today":"");
+    c.innerHTML=(i===todayIdx?'<span class="tag">النهارده</span>':"")+
+      '<div class="top"><b>اليوم '+ar(i+1)+'</b><span class="date">'+wd.format(d)+" "+dm.format(d)+'</span></div>';
+    tasks[i]=[];
+    defs.forEach(function(df,j){
+      var b=document.createElement("button");
+      b.className="task";b.setAttribute("role","checkbox");
+      b.innerHTML='<i class="box"></i><em>'+ar(df[0])+'</em><span>'+ar(df[1])+" – "+ar(df[1]+df[0]-1)+'</span>';
+      b.addEventListener("click",function(){done[i][j]=!done[i][j];save();paint()});
+      c.appendChild(b);tasks[i][j]=b;
+    });
+    grid.appendChild(c);cards.push(c);
+  }
+  function paint(){
+    var n=0,days=0;
+    for(var i=0;i<N;i++){
+      for(var j=0;j<2;j++){tasks[i][j].setAttribute("aria-checked",done[i][j]);if(done[i][j])n++}
+      var full=done[i][0]&&done[i][1];if(full)days++;
+      cards[i].classList.toggle("full",!!full);
+    }
+    var p=Math.round(n/T*100);
+    document.getElementById("count").textContent=ar(n)+" من "+ar(T)+" مهمة · "+ar(days)+" يوم كامل";
+    document.getElementById("pct").textContent=ar(p)+"٪";
+    document.getElementById("fill").style.width=p+"%";
+    document.getElementById("msg").textContent=
+      n===T?"خلّصت التحدّي كله، مبروك! 🎉":n===0?"اضغط على أي مهمة عشان تعلّمها ✓":"باقي "+ar(T-n)+" مهمة";
+  }
+  var r=document.getElementById("reset"),tm;
+  r.addEventListener("click",function(){
+    if(r.dataset.ask){for(var i=0;i<N;i++)done[i]=[false,false];save();paint();r.textContent="مسح كل التعليمات";delete r.dataset.ask;clearTimeout(tm)}
+    else{r.dataset.ask=1;r.textContent="متأكد؟ اضغط تاني";tm=setTimeout(function(){delete r.dataset.ask;r.textContent="مسح كل التعليمات"},3000)}
+  });
+  paint();
+})();
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
+</script>
+</body>
+</html>
